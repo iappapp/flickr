@@ -5,6 +5,10 @@ import Login from './Login';
 import Game from './component/Game';
 import Clock from './component/Clock';
 import WebApp from './component/WebApp';
+import Counter from './component/Counter';
+import HelloMessage from './component/Message';
+import FlavorForm from './component/FormList';
+import LoginControl from './component/LoginBox';
 
 function Home() {
   return (
@@ -31,6 +35,13 @@ function Home() {
           <Link className="App-link" to="/game">前往游戏页面</Link>
         </div>
 
+        <div style={{marginTop:20}}>
+          <Link className="App-link" to="/loginBox">前往登录控制页面</Link>
+        </div>
+
+        <Counter />
+        <Clock />
+        <Clock />
         <Clock />
         <WebApp />
       </header>
@@ -44,6 +55,9 @@ function App() {
       <Route path="/" element={<Home />} />
       <Route path="/login" element={<Login />} />
       <Route path="/game" element={<Game />} />
+      <Route path="/message" element={<HelloMessage />} />
+      <Route path="/form" element={<FlavorForm />} />
+      <Route path="/loginBox" element={<LoginControl />} />
     </Routes>
   );
 }
