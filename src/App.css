@@ -519,6 +519,237 @@
   color: #764ba2;
 }
 
+.task-page-drawer {
+  width: 100%;
+  display: flex;
+  justify-content: flex-end;
+  padding: 24px 16px;
+  box-sizing: border-box;
+}
+
+.task-page {
+  width: 100%;
+  max-width: 600px;
+  padding: 0 16px 24px;
+}
+
+.task-page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 20px;
+  padding: 16px 20px;
+  border-radius: 12px;
+  background: #fff;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.05);
+}
+
+.task-page-title {
+  font-size: 22px;
+  font-weight: 600;
+}
+
+.task-header-close {
+  color: rgba(0, 0, 0, 0.45);
+}
+
+.task-list {
+  display: grid;
+  gap: 18px;
+}
+
+.task-card {
+  background: #fff;
+  border-radius: 16px;
+  padding: 20px;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.06);
+}
+
+.task-card-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 20px;
+}
+
+.task-card-title {
+  font-size: 18px;
+  font-weight: 600;
+  color: #111;
+  min-width: 0;
+}
+
+.task-card-stages {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 0;
+  padding: 16px 0;
+  border-top: 1px solid #f0f0f0;
+  border-bottom: 1px solid #f0f0f0;
+  margin-bottom: 20px;
+}
+
+.stage-item {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  font-size: 14px;
+  color: #595959;
+  min-height: 38px;
+  border-right: 1px solid #f0f0f0;
+}
+
+.stage-item:last-child {
+  border-right: none;
+}
+
+.stage-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: #ff4d4f;
+}
+
+.task-card-progress-row {
+  display: grid;
+  gap: 12px;
+  margin-bottom: 20px;
+}
+
+.progress-info-row {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.progress-label {
+  color: #595959;
+  font-size: 14px;
+}
+
+.progress-value {
+  font-size: 16px;
+  font-weight: 600;
+}
+
+.task-card-times {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 18px;
+}
+
+.time-block {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+}
+
+.time-label {
+  color: #8c8c8c;
+  font-size: 13px;
+}
+
+.time-value {
+  font-size: 14px;
+  color: #262626;
+}
+
+@media (max-width: 680px) {
+  .task-page-header,
+  .task-card {
+    padding: 14px;
+  }
+
+  .task-card-stages {
+    flex-direction: column;
+    align-items: flex-start;
+  }
+
+  .task-card-times {
+    grid-template-columns: 1fr;
+  }
+}
+
+/* Log page styles */
+.log-page {
+  padding: 32px 24px;
+  background: #fafafa;
+  min-height: 100vh;
+}
+
+.log-page-header {
+  margin-bottom: 32px;
+}
+
+.log-page-title {
+  font-size: 32px;
+  font-weight: 700;
+  margin: 0 0 8px 0;
+  color: #111;
+}
+
+.log-page-subtitle {
+  font-size: 14px;
+  color: #8c8c8c;
+  margin: 0;
+}
+
+.log-filter-bar {
+  background: #fff;
+  padding: 16px 20px;
+  border-radius: 8px;
+  margin-bottom: 24px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+}
+
+.log-filter-bar .ant-button {
+  border-radius: 6px;
+  font-size: 14px;
+}
+
+.log-search-input {
+  width: 240px;
+  border-radius: 6px;
+}
+
+.log-table-wrapper {
+  background: #fff;
+  border-radius: 8px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+  overflow: hidden;
+}
+
+.log-table-wrapper .ant-table {
+  font-size: 14px;
+}
+
+.log-table-wrapper .ant-table-thead > tr > th {
+  background: #fafafa;
+  font-weight: 600;
+  border-bottom: 1px solid #f0f0f0;
+}
+
+.log-table-wrapper .ant-table-cell {
+  padding: 14px 16px;
+}
+
+@media (max-width: 768px) {
+  .log-page {
+    padding: 16px 12px;
+  }
+
+  .log-page-title {
+    font-size: 24px;
+  }
+
+  .log-search-input {
+    width: 100%;
+  }
+}
+
 /* Responsive design */
 @media (max-width: 900px) {
   .login-container-modern {
