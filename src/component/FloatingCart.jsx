@@ -27,7 +27,7 @@ export default function FloatingCart(){
             ))}
           </div>
           <div className="cart-footer">
-            <div className="cart-total">合计: ￥{total}</div>
+            <div className="cart-total">合计: ￥{total.toFixed(2)}</div>
             <button className="checkout">去结算</button>
           </div>
         </div>

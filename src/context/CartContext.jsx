@@ -9,15 +9,22 @@ export function useCart(){
 export function CartProvider({ children }){
   const [items, setItems] = useState([])
 
+  function parsePrice(value){
+    if (typeof value === 'number') return value
+    const parsed = parseFloat(String(value).replace(/[¥￥,\s]/g, ''))
+    return Number.isFinite(parsed) ? parsed : 0
+  }
+
   function addItem(product){
     setItems((prev)=>{
+      const priceValue = parsePrice(product.price)
       const idx = prev.findIndex(i=>i.id===product.id)
       if(idx>=0){
         const copy = [...prev]
         copy[idx] = { ...copy[idx], qty: copy[idx].qty + 1 }
         return copy
       }
-      return [...prev, { ...product, qty: 1 }]
+      return [...prev, { ...product, qty: 1, priceValue }]
     })
   }
 
@@ -37,7 +44,7 @@ export function CartProvider({ children }){
 
   function clear(){ setItems([]) }
 
-  const total = items.reduce((s,i)=>s + (i.price||0) * i.qty, 0)
+  const total = items.reduce((s,i)=>s + i.priceValue * i.qty, 0)
 
   return (
     <CartContext.Provider value={{ items, addItem, removeItem, clear, total }}>

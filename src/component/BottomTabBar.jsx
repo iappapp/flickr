@@ -1,5 +1,4 @@
 import React from 'react';
-import { Button } from 'tdesign-react';
 import './BottomTabBar.css';
 
 const tabItems = [
@@ -14,16 +13,15 @@ export default function BottomTabBar({ activeTab, onTabChange }) {
     <div className="bottom-tab-bar">
       <div className="bottom-tab-bar__container">
         {tabItems.map((item) => (
-          <Button
+          <button
             key={item.key}
-            theme={activeTab === item.key ? 'primary' : 'default'}
-            variant="text"
+            type="button"
             className={`bottom-tab-bar__item ${activeTab === item.key ? 'active' : ''}`}
             onClick={() => onTabChange(item.key)}
           >
             <span className="bottom-tab-bar__icon">{item.icon}</span>
             <span className="bottom-tab-bar__label">{item.label}</span>
-          </Button>
+          </button>
         ))}
       </div>
     </div>
