@@ -13,6 +13,8 @@
     "react-dom": "^19.2.7",
     "react-router-dom": "^6.30.4",
     "react-scripts": "5.0.1",
+    "tdesign-icons-react": "^0.6.4",
+    "tdesign-react": "^1.17.1",
     "web-vitals": "^2.1.4"
   },
   "scripts": {
