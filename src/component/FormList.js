@@ -1,5 +1,4 @@
 import React from 'react';
-import logo from '.././logo.svg';
 
 class FlavorForm extends React.Component {
   constructor(props) {

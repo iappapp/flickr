@@ -14,6 +14,7 @@ function Stopwatch() {
     if (intervalRef.current) return;
     intervalRef.current = setInterval(() => {
       setTime(t => t + 1);
+      console.log('当前时间:', time + 1);
     }, 1000);
   };
 

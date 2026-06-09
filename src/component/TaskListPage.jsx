@@ -41,12 +41,20 @@ function TaskCard({ task }) {
       </div>
 
       <div className="task-card-stages">
-        {task.stages.map((stage, index) => (
-          <div className="stage-item" key={stage}>
-            <span className="stage-dot"></span>
-            <span>{stage}</span>
-          </div>
-        ))}
+        {task.stages.flatMap((stage, index) => {
+          const nodes = [
+            <div className="stage-step" key={stage}>
+              <div className="stage-icon">✓</div>
+              <div className="stage-text">{stage}</div>
+            </div>,
+          ];
+
+          if (index < task.stages.length - 1) {
+            nodes.push(<div className="stage-line" key={`${stage}-line`} />);
+          }
+
+          return nodes;
+        })}
       </div>
 
       <div className="task-card-progress-row">
