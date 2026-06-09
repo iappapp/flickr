@@ -4,6 +4,7 @@ import HomeTopBanner from '../component/HomeTopBanner';
 import HomeFunctionGrid from '../component/HomeFunctionGrid';
 import HomeAdSection from '../component/HomeAdSection';
 import MenuPage from './MenuPage';
+import MyPage from './MyPage';
 import BottomTabBar from '../component/BottomTabBar';
 
 const tabs = [
@@ -27,7 +28,8 @@ export default function HomePage() {
           </>
         )}
         {activeTab === 'menu' && <MenuPage />}
-        {!['home', 'menu'].includes(activeTab) && (
+        {activeTab === 'mine' && <MyPage />}
+        {activeTab === 'card' && (
           <div className="home-page__placeholder">
             <div className="home-page__placeholder-title">{tabs.find((tab) => tab.key === activeTab)?.title}</div>
             <div className="home-page__placeholder-copy">正在建设中，敬请期待更多瑞幸体验</div>

@@ -1,0 +1,21 @@
+.gift-carousel {
+    display: flex;
+    gap: 12px;
+    padding: 12px;
+    overflow-x: auto
+}
+
+.gift-card {
+    min-width: 200px;
+    height: 110px;
+    background: #fff;
+    border-radius: 10px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    box-shadow: 0 1px 0 rgba(0, 0, 0, 0.06)
+}
+
+.gift-img {
+    padding: 10px
+}

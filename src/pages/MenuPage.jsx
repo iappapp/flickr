@@ -3,6 +3,8 @@ import './MenuPage.css';
 import MenuTopBar from '../component/MenuTopBar';
 import MenuCategory from '../component/MenuCategory';
 import MenuProductList from '../component/MenuProductList';
+import { CartProvider } from '../context/CartContext'
+import FloatingCart from '../component/FloatingCart'
 
 const categories = [
   { id: 'popular', name: '人气Top', icon: '🔥' },
@@ -99,25 +101,28 @@ export default function MenuPage() {
   const [store, setStore] = useState('东山弄店');
 
   return (
-    <div className="menu-page">
-      <MenuTopBar
-        deliveryType={deliveryType}
-        onDeliveryTypeChange={setDeliveryType}
-        store={store}
-        onStoreChange={setStore}
-      />
-      <div className="menu-page__body">
-        <div className="menu-page__left">
-          <MenuCategory
-            categories={categories}
-            selectedCategory={selectedCategory}
-            onCategorySelect={setSelectedCategory}
-          />
+    <CartProvider>
+      <div className="menu-page">
+        <MenuTopBar
+          deliveryType={deliveryType}
+          onDeliveryTypeChange={setDeliveryType}
+          store={store}
+          onStoreChange={setStore}
+        />
+        <div className="menu-page__body">
+          <div className="menu-page__left">
+            <MenuCategory
+              categories={categories}
+              selectedCategory={selectedCategory}
+              onCategorySelect={setSelectedCategory}
+            />
+          </div>
+          <div className="menu-page__right">
+            <MenuProductList products={products[selectedCategory] || []} />
+          </div>
         </div>
-        <div className="menu-page__right">
-          <MenuProductList products={products[selectedCategory] || []} />
-        </div>
+        <FloatingCart />
       </div>
-    </div>
-  );
+    </CartProvider>
+  )
 }

@@ -1,7 +1,9 @@
 import React from 'react';
 import './MenuProductList.css';
+import { useCart } from '../context/CartContext'
 
 export default function MenuProductList({ products }) {
+  const { addItem } = useCart()
   return (
     <div className="menu-product-list">
       {products.map((product) => (
@@ -10,7 +12,7 @@ export default function MenuProductList({ products }) {
           <div className="menu-product-card__content">
             <div className="menu-product-card__header">
               <h3 className="menu-product-card__title">{product.name}</h3>
-              <button type="button" className="menu-product-card__add">+</button>
+              <button type="button" className="menu-product-card__add" onClick={() => addItem(product)}>+</button>
             </div>
             {product.tags && product.tags.length > 0 && (
               <div className="menu-product-card__tags">
