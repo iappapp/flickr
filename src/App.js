@@ -12,6 +12,7 @@ import TaskListPage from './component/TaskListPage';
 import LogPage from './component/LogPage';
 import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
+import PeriodicTablePage from './pages/PeriodicTablePage'; // 新增导入
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -20,6 +21,7 @@ function App() {
       <Routes>
         <Route path="/" element={<HomePage />} />
         <Route path="/cart" element={<CartPage />} />
+        <Route path="/periodic-table" element={<PeriodicTablePage />} /> {/* 新增路由 */}
         <Route path="/login" element={<Login />} />
         <Route path="/game" element={<Game />} />
         <Route path="/message" element={<HelloMessage />} />
