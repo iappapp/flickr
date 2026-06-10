@@ -3,7 +3,6 @@ import './MenuPage.css';
 import MenuTopBar from '../component/MenuTopBar';
 import MenuCategory from '../component/MenuCategory';
 import MenuProductList from '../component/MenuProductList';
-import { CartProvider } from '../context/CartContext'
 import FloatingCart from '../component/FloatingCart'
 
 const categories = [
@@ -101,7 +100,6 @@ export default function MenuPage() {
   const [store, setStore] = useState('东山弄店');
 
   return (
-    <CartProvider>
       <div className="menu-page">
         <MenuTopBar
           deliveryType={deliveryType}
@@ -123,6 +121,5 @@ export default function MenuPage() {
         </div>
         <FloatingCart />
       </div>
-    </CartProvider>
   )
 }

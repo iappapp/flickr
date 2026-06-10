@@ -11,20 +11,25 @@ import Stopwatch from './component/Stopwatch';
 import TaskListPage from './component/TaskListPage';
 import LogPage from './component/LogPage';
 import HomePage from './pages/HomePage';
+import CartPage from './pages/CartPage';
+import { CartProvider } from './context/CartContext';
 
 function App() {
   return (
-    <Routes>
-      <Route path="/" element={<HomePage />} />
-      <Route path="/login" element={<Login />} />
-      <Route path="/game" element={<Game />} />
-      <Route path="/message" element={<HelloMessage />} />
-      <Route path="/form" element={<FlavorForm />} />
-      <Route path="/loginBox" element={<LoginControl />} />
-      <Route path="/stopwatch" element={<Stopwatch />} />
-      <Route path="/log" element={<LogPage />} />
-      <Route path="/taskListPage" element={<TaskListPage />} />
-    </Routes>
+    <CartProvider>
+      <Routes>
+        <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<CartPage />} />
+        <Route path="/login" element={<Login />} />
+        <Route path="/game" element={<Game />} />
+        <Route path="/message" element={<HelloMessage />} />
+        <Route path="/form" element={<FlavorForm />} />
+        <Route path="/loginBox" element={<LoginControl />} />
+        <Route path="/stopwatch" element={<Stopwatch />} />
+        <Route path="/log" element={<LogPage />} />
+        <Route path="/taskListPage" element={<TaskListPage />} />
+      </Routes>
+    </CartProvider>
   );
 }
 

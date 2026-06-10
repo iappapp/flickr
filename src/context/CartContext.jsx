@@ -42,6 +42,10 @@ export function CartProvider({ children }){
     })
   }
 
+  function removeLine(productId){
+    setItems((prev)=>prev.filter((item)=>item.id !== productId))
+  }
+
   function clear(){ setItems([]) }
 
   const total = items.reduce((s,i)=>s + i.priceValue * i.qty, 0)
