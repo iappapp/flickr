@@ -1,0 +1,64 @@
+/* ── Hourly Forecast (frosted card) ── */
+.hourly-forecast {
+  color: #fff;
+}
+
+.hourly-forecast__label {
+  font-size: 11px;
+  font-weight: 600;
+  text-transform: uppercase;
+  letter-spacing: 0.8px;
+  opacity: 0.45;
+  margin-bottom: 14px;
+}
+
+.hourly-forecast__scroll {
+  display: flex;
+  gap: 8px;
+  overflow-x: auto;
+  padding-bottom: 4px;
+  scrollbar-width: none;
+}
+.hourly-forecast__scroll::-webkit-scrollbar { display: none; }
+
+.hourly-forecast__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 10px;
+  min-width: 54px;
+  padding: 10px 6px;
+  border-radius: 14px;
+  transition: background 0.2s;
+}
+.hourly-forecast__item--now {
+  background: rgba(255,255,255,0.14);
+}
+
+.hourly-forecast__time {
+  font-size: 12px;
+  font-weight: 500;
+  opacity: 0.55;
+}
+.hourly-forecast__item--now .hourly-forecast__time {
+  opacity: 1;
+  font-weight: 600;
+}
+
+.hourly-forecast__icon {
+  font-size: 20px;
+  line-height: 1;
+}
+
+/* Tiny temp chart dots */
+.hourly-forecast__dot {
+  width: 4px;
+  height: 4px;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.4);
+}
+
+.hourly-forecast__temp {
+  font-size: 15px;
+  font-weight: 550;
+}

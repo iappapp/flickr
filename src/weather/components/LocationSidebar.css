@@ -1,0 +1,102 @@
+/* ── Location Sidebar (always visible, left column) ── */
+
+.location-sidebar {
+  width: 150px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  scrollbar-width: none;
+
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 16px 10px;
+
+  /* frosted glass */
+  background: rgba(255,255,255,0.06);
+  backdrop-filter: blur(30px) saturate(150%);
+  -webkit-backdrop-filter: blur(30px) saturate(150%);
+  border-radius: 8px;
+  border: 1px solid rgba(255,255,255,0.08);
+
+  color: #fff;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'PingFang SC', sans-serif;
+
+  scrollbar-width: thin;
+  scrollbar-color: rgba(255,255,255,0.12) transparent;
+}
+.location-sidebar::-webkit-scrollbar { display: none; }
+
+/* ── Title ── */
+.location-sidebar__title {
+  font-size: 10px;
+  font-weight: 700;
+  text-transform: uppercase;
+  letter-spacing: 1px;
+  opacity: 0.35;
+  padding: 4px 6px 8px;
+  text-align: center;
+}
+
+/* ── City item ── */
+.location-sidebar__item {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 3px;
+  padding: 10px 4px;
+  border-radius: 8px;
+  cursor: pointer;
+  transition: background 0.15s;
+  position: relative;
+}
+.location-sidebar__item:hover {
+  background: rgba(255,255,255,0.08);
+}
+.location-sidebar__item--active {
+  background: rgba(255,255,255,0.13);
+}
+
+.location-sidebar__icon {
+  font-size: 24px;
+  line-height: 1;
+}
+
+.location-sidebar__name {
+  font-size: 13px;
+  font-weight: 550;
+  line-height: 1.2;
+  text-align: center;
+  word-break: keep-all;
+}
+
+.location-sidebar__temp {
+  font-size: 16px;
+  font-weight: 500;
+}
+
+.location-sidebar__range {
+  font-size: 10px;
+  opacity: 0.4;
+}
+
+/* ── Star ── */
+.location-sidebar__star {
+  position: absolute;
+  top: 4px;
+  right: 4px;
+  font-size: 11px;
+  cursor: pointer;
+  opacity: 0.25;
+  transition: opacity 0.15s, transform 0.15s;
+  padding: 2px;
+}
+.location-sidebar__star:hover,
+.location-sidebar__star--active {
+  opacity: 1;
+}
+.location-sidebar__star--active {
+  color: #fbbf24;
+}
+.location-sidebar__star:active {
+  transform: scale(1.2);
+}

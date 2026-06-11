@@ -1,0 +1,55 @@
+/* ── Current Weather Hero ── */
+.current-weather {
+  text-align: center;
+  padding: 50px 0 28px;
+  color: #fff;
+}
+
+.current-weather__date {
+  font-size: 14px;
+  font-weight: 450;
+  opacity: 0.65;
+  margin-bottom: 4px;
+}
+
+.current-weather__temp {
+  font-size: 96px;
+  font-weight: 200;
+  line-height: 1;
+  letter-spacing: -4px;
+  display: inline-block;
+  position: relative;
+}
+.current-weather__temp::after {
+  content: '°';
+  font-size: 42px;
+  font-weight: 300;
+  position: absolute;
+  top: 10px;
+  right: -28px;
+  letter-spacing: 0;
+}
+
+.current-weather__condition {
+  font-size: 18px;
+  font-weight: 450;
+  margin-top: 4px;
+  opacity: 0.85;
+}
+
+.current-weather__range {
+  font-size: 15px;
+  font-weight: 450;
+  margin-top: 6px;
+  opacity: 0.6;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 6px;
+}
+.current-weather__range-high {
+  opacity: 0.9;
+}
+.current-weather__range-sep {
+  opacity: 0.4;
+}

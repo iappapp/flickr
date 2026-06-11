@@ -1,0 +1,125 @@
+/* ── macOS 26 Weather – Page ── */
+.weather-page {
+  min-height: 100vh;
+  font-family: -apple-system, BlinkMacSystemFont, 'SF Pro Display', 'SF Pro Text',
+    'PingFang SC', 'Helvetica Neue', sans-serif;
+  color: #fff;
+  position: relative;
+  overflow-x: hidden;
+  transition: background 0.8s ease;
+}
+
+/* Dynamic weather backgrounds */
+.weather-page--sunny {
+  background: linear-gradient(175deg, #3b82f6 0%, #2563eb 25%, #1e40af 55%, #172554 100%);
+}
+.weather-page--cloudy {
+  background: linear-gradient(175deg, #64748b 0%, #475569 30%, #334155 60%, #1e293b 100%);
+}
+.weather-page--rainy {
+  background: linear-gradient(175deg, #4a5568 0%, #3a4a5c 30%, #2d3748 60%, #1a202c 100%);
+}
+.weather-page--night {
+  background: linear-gradient(175deg, #1e1b4b 0%, #0f0d2e 40%, #06051a 100%);
+}
+
+/* Ambient glow */
+.weather-page::before {
+  content: '';
+  position: fixed;
+  top: -30%;
+  left: 20%;
+  width: 60%;
+  height: 50%;
+  background: radial-gradient(ellipse, rgba(255,255,255,0.06) 0%, transparent 70%);
+  pointer-events: none;
+  z-index: 0;
+}
+
+/* ── Three‑column layout ── */
+.weather-page__layout {
+  display: flex;
+  height: 100vh;
+  gap: 16px;
+  padding: 12px;
+  position: relative;
+  z-index: 1;
+}
+
+/* ── Col 2: middle (forecasts) ── */
+.weather-page__middle {
+  flex: 1;
+  min-width: 0;
+  overflow-y: auto;
+  padding-bottom: 40px;
+  scrollbar-width: none;
+  padding-top: 50px;
+}
+.weather-page__middle::-webkit-scrollbar { display: none; }
+
+/* ── Col 3: right (current + detail cards) ── */
+.weather-page__right {
+  width: 340px;
+  flex-shrink: 0;
+  overflow-y: auto;
+  padding-bottom: 40px;
+  scrollbar-width: none;
+}
+.weather-page__right::-webkit-scrollbar { display: none; }
+
+/* ── Section spacing ── */
+.weather-page__section {
+  margin-bottom: 16px;
+}
+
+/* ── Frosted container (reusable) ── */
+.weather-frosted {
+  background: rgba(255,255,255,0.10);
+  backdrop-filter: blur(24px) saturate(140%);
+  -webkit-backdrop-filter: blur(24px) saturate(140%);
+  border: 1px solid rgba(255,255,255,0.12);
+  border-radius: 20px;
+  padding: 20px;
+}
+
+/* ── Mobile: stack vertically ── */
+@media (max-width: 900px) {
+  .weather-page__layout {
+    flex-direction: column;
+    height: auto;
+    gap: 12px;
+    padding: 8px;
+  }
+
+  .weather-page__middle {
+    overflow-y: visible;
+  }
+
+  .weather-page__right {
+    width: 100%;
+    overflow-y: visible;
+  }
+
+  /* Sidebar becomes horizontal scroll row */
+  .location-sidebar {
+    width: 100% !important;
+    flex-direction: row !important;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 8px !important;
+    gap: 8px !important;
+    border-radius: 8px !important;
+  }
+
+  .location-sidebar__title {
+    display: none;
+  }
+
+  .location-sidebar__item {
+    flex-direction: column !important;
+    min-width: 72px;
+    flex-shrink: 0;
+    padding: 8px 6px !important;
+  }
+}

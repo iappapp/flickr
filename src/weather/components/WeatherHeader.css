@@ -1,0 +1,47 @@
+/* ── macOS-style header ── */
+.weather-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 14px 8px 10px;
+  color: #fff;
+  position: relative;
+  z-index: 2;
+}
+
+.weather-header__location {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: 18px;
+  font-weight: 590;
+}
+
+.weather-header__chevron {
+  font-size: 11px;
+  opacity: 0.5;
+  margin-top: 1px;
+}
+
+.weather-header__actions {
+  display: flex;
+  gap: 8px;
+  flex-shrink: 0;
+}
+.weather-header__action {
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 50%;
+  background: rgba(255,255,255,0.12);
+  backdrop-filter: blur(10px);
+  -webkit-backdrop-filter: blur(10px);
+  font-size: 15px;
+  cursor: pointer;
+  transition: background 0.2s;
+}
+.weather-header__action:hover {
+  background: rgba(255,255,255,0.20);
+}
