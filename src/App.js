@@ -1,7 +1,7 @@
 import './App.css';
 import { Routes, Route } from 'react-router-dom';
 import Login from './Login';
-import Game from './component/Game';
+import Game from './pages/Game';
 import Clock from './component/Clock';
 import Counter from './component/Counter';
 import HelloMessage from './component/Message';

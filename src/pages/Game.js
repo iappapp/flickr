@@ -1,5 +1,5 @@
 import React, { useState, useEffect, useRef } from 'react';
-import '.././App.css';
+import './Game.css';
 
 const SIZE = 4;
 
@@ -96,7 +96,6 @@ export default function Game() {
   const move = (dir) => {
     if (over) return;
     let working = copyGrid(grid);
-    let rotated = false;
     // dir: 'left','right','up','down'
     if (dir === 'right') {
       // flip each row
@@ -204,7 +203,7 @@ export default function Game() {
           {grid.map((row, r) => (
             <div className="grid-row" key={r}>
               {row.map((cell, c) => (
-                <div className={`cell ${cell ? 'tile' : 'empty'}`} key={c}>
+                <div className={`cell-item ${cell ? 'tile' : 'empty'}`} key={c}>
                   {cell !== 0 ? <div className={`num n${cell}`}>{cell}</div> : null}
                 </div>
               ))}
