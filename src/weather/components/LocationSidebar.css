@@ -2,6 +2,7 @@
 
 .location-sidebar {
   width: 150px;
+  height: calc(100vh - 130px);
   flex-shrink: 0;
   overflow-y: auto;
   scrollbar-width: none;
@@ -23,12 +24,13 @@
 
   scrollbar-width: thin;
   scrollbar-color: rgba(255,255,255,0.12) transparent;
+  margin-top: 50px;
 }
 .location-sidebar::-webkit-scrollbar { display: none; }
 
 /* ── Title ── */
 .location-sidebar__title {
-  font-size: 10px;
+  font-size: 24px;
   font-weight: 700;
   text-transform: uppercase;
   letter-spacing: 1px;
@@ -48,6 +50,7 @@
   cursor: pointer;
   transition: background 0.15s;
   position: relative;
+  font-size: 32px;
 }
 .location-sidebar__item:hover {
   background: rgba(255,255,255,0.08);
@@ -99,4 +102,27 @@
 }
 .location-sidebar__star:active {
   transform: scale(1.2);
+}
+
+/* ── Mobile: horizontal scroll row ── */
+@media (max-width: 700px) {
+  .location-sidebar {
+    width: 100%;
+    flex-direction: row;
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding: 10px 50px;
+    gap: 8px;
+  }
+
+  .location-sidebar__title {
+    display: none;
+  }
+
+  .location-sidebar__item {
+    min-width: 72px;
+    flex-shrink: 0;
+    padding: 8px 6px;
+  }
 }

@@ -99,27 +99,4 @@
     width: 100%;
     overflow-y: visible;
   }
-
-  /* Sidebar becomes horizontal scroll row */
-  .location-sidebar {
-    width: 100% !important;
-    flex-direction: row !important;
-    flex-wrap: nowrap;
-    overflow-x: auto;
-    overflow-y: hidden;
-    padding: 10px 8px !important;
-    gap: 8px !important;
-    border-radius: 8px !important;
-  }
-
-  .location-sidebar__title {
-    display: none;
-  }
-
-  .location-sidebar__item {
-    flex-direction: column !important;
-    min-width: 72px;
-    flex-shrink: 0;
-    padding: 8px 6px !important;
-  }
 }

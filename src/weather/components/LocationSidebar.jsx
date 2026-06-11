@@ -49,7 +49,7 @@ export default function LocationSidebar({
 
       {favCities.length === 0 && (
         <div style={{
-          textAlign: 'center', padding: '20px 8px', opacity: 0.35, fontSize: 12,
+          textAlign: 'center', padding: '20px 8px', opacity: 0.35, fontSize: 18,
         }}>
           暂无收藏<br/>点击 ⋯ 添加
         </div>
