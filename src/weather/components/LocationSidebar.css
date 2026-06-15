@@ -2,7 +2,7 @@
 
 .location-sidebar {
   width: 150px;
-  height: calc(100vh - 130px);
+  height: 700px;
   flex-shrink: 0;
   overflow-y: auto;
   scrollbar-width: none;
