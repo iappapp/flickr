@@ -1,0 +1,194 @@
+.chat-app {
+  display: flex;
+  width: 100%;
+  height: 100vh;
+  background: #ededed;
+  overflow: hidden;
+  font-family: -apple-system, BlinkMacSystemFont, 'PingFang SC', 'Microsoft YaHei', sans-serif;
+  color: #1a1a1a;
+}
+
+/* ---- Long-list virtualization via content-visibility (item 20) ---- */
+.bubble-row,
+.message-divider {
+  content-visibility: auto;
+  contain-intrinsic-size: 0 90px;
+}
+
+/* ---- Mobile responsive (item 21) ---- */
+.chat-app__sidebar,
+.chat-app__main {
+  display: contents; /* not used directly; children are ConversationList / ChatWindow */
+}
+
+@media (max-width: 768px) {
+  .chat-app {
+    flex-direction: column;
+  }
+  .chat-app .conversation-list {
+    width: 100%;
+    min-width: 0;
+    display: block;
+  }
+  .chat-app .chat-window {
+    display: none;
+    flex: 1;
+    min-width: 0;
+  }
+  .chat-app[data-mobile='chat'] .conversation-list {
+    display: none;
+  }
+  .chat-app[data-mobile='chat'] .chat-window {
+    display: flex;
+  }
+  .chat-header__back {
+    display: inline-flex;
+    align-items: center;
+  }
+}
+
+/* ---- Dark theme overrides (item 24) ---- */
+[data-theme='dark'] {
+  background: #1c1c1c;
+  color: #e6e6e6;
+}
+
+[data-theme='dark'] .conversation-list {
+  background: #232323;
+  border-right-color: #111;
+}
+[data-theme='dark'] .conversation-list__header {
+  background: #232323;
+  border-bottom-color: #111;
+}
+[data-theme='dark'] .conversation-list__search input {
+  background: #333;
+  color: #e6e6e6;
+}
+[data-theme='dark'] .conversation-item:hover {
+  background: #2c2c2c;
+}
+[data-theme='dark'] .conversation-item.is-active {
+  background: #303030;
+}
+[data-theme='dark'] .conversation-item__name {
+  color: #f0f0f0;
+}
+
+[data-theme='dark'] .chat-header {
+  background: #2a2a2a;
+  border-bottom-color: #1a1a1a;
+}
+[data-theme='dark'] .chat-header__name {
+  color: #f0f0f0;
+}
+[data-theme='dark'] .chat-header__back {
+  color: #f0f0f0;
+}
+[data-theme='dark'] .chat-header.is-clickable:hover {
+  background: #2f2f2f;
+}
+
+[data-theme='dark'] .message-list {
+  background: #1c1c1c;
+}
+[data-theme='dark'] .message-divider {
+  background: rgba(255, 255, 255, 0.12);
+  color: #ddd;
+}
+[data-theme='dark'] .message-typing {
+  background: #2a2a2a;
+}
+[data-theme='dark'] .message-typing__dot {
+  background: #888;
+}
+[data-theme='dark'] .message-scroll-btn {
+  background: #2a2a2a;
+  color: #07c160;
+}
+
+[data-theme='dark'] .bubble-content {
+  background: #2a2a2a;
+  color: #e6e6e6;
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.4);
+}
+[data-theme='dark'] .is-other .bubble-content::before {
+  border-right-color: #2a2a2a;
+}
+[data-theme='dark'] .is-me .bubble-content {
+  background: #95ec69;
+  color: #1a1a1a;
+}
+[data-theme='dark'] .is-me .bubble-content::before {
+  border-left-color: #95ec69;
+}
+[data-theme='dark'] .bubble-sender {
+  color: #aaa;
+}
+[data-theme='dark'] .bubble-time {
+  color: #888;
+}
+[data-theme='dark'] .bubble-system {
+  background: rgba(255, 255, 255, 0.1);
+  color: #bbb;
+}
+
+[data-theme='dark'] .message-input {
+  background: #232323;
+  border-top-color: #1a1a1a;
+}
+[data-theme='dark'] .message-input__toolbar {
+  border-bottom-color: #2a2a2a;
+}
+[data-theme='dark'] .message-input__btn:hover {
+  background: #333;
+}
+[data-theme='dark'] .message-input__textarea {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+  color: #e6e6e6;
+}
+[data-theme='dark'] .voice-recorder__btn {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+  color: #e6e6e6;
+}
+[data-theme='dark'] .voice-recorder__btn:hover {
+  background: #333;
+}
+[data-theme='dark'] .emoji-picker,
+[data-theme='dark'] .forward-picker,
+[data-theme='dark'] .msg-menu {
+  background: #2a2a2a;
+  border-color: #3a3a3a;
+  color: #e6e6e6;
+}
+[data-theme='dark'] .emoji-picker__item:hover,
+[data-theme='dark'] .forward-picker__item:hover,
+[data-theme='dark'] .msg-menu__item:hover {
+  background: #333;
+}
+[data-theme='dark'] .emoji-picker__search input {
+  background: #333;
+  color: #e6e6e6;
+  border-color: #444;
+}
+[data-theme='dark'] .contact-picker,
+[data-theme='dark'] .group-info {
+  background: #2a2a2a;
+  color: #e6e6e6;
+}
+[data-theme='dark'] .contact-picker__header,
+[data-theme='dark'] .contact-picker__footer,
+[data-theme='dark'] .group-info__header,
+[data-theme='dark'] .group-info__footer {
+  border-color: #3a3a3a;
+}
+[data-theme='dark'] .contact-picker__item:hover,
+[data-theme='dark'] .contact-picker__item.is-checked {
+  background: #333;
+}
+[data-theme='dark'] .contact-picker__name,
+[data-theme='dark'] .group-info__member-name {
+  color: #ddd;
+}

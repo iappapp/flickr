@@ -1,0 +1,89 @@
+.voice-recorder__error {
+  padding: 6px 12px;
+  font-size: 12px;
+  color: #fa5151;
+  background: #fff1f0;
+  border-top: 1px solid #ffd6d6;
+}
+
+.voice-recorder__bar {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 12px;
+  background: #fff1f0;
+  border-top: 1px solid #ffd6d6;
+  font-size: 13px;
+  color: #fa5151;
+}
+
+.voice-recorder__bar.is-cancel {
+  background: #f5f5f5;
+  color: #888;
+  border-top-color: #e5e5e5;
+}
+
+.voice-recorder__wave {
+  width: 6px;
+  height: 24px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.voice-recorder__wave-fill {
+  display: block;
+  width: 6px;
+  height: 100%;
+  background: #fa5151;
+  border-radius: 3px;
+  transform-origin: center;
+  transition: transform 0.1s ease-out;
+}
+
+.voice-recorder__text {
+  flex: 1;
+}
+
+.voice-recorder__cancel {
+  border: 1px solid currentColor;
+  background: #fff;
+  color: inherit;
+  border-radius: 4px;
+  padding: 3px 10px;
+  font-size: 12px;
+  cursor: pointer;
+}
+
+.voice-recorder__cancel:hover {
+  background: currentColor;
+  color: #fff;
+}
+
+.voice-recorder__btn {
+  height: 70px;
+  width: 88px;
+  border: 1px solid #d9d9d9;
+  background: #fff;
+  border-radius: 6px;
+  cursor: pointer;
+  font-size: 13px;
+  color: #555;
+  flex-shrink: 0;
+  transition: all 0.15s;
+}
+
+.voice-recorder__btn:hover {
+  background: #f0f0f0;
+}
+
+.voice-recorder__btn.is-recording {
+  background: #fa5151;
+  color: #fff;
+  border-color: #fa5151;
+}
+
+.voice-recorder__btn:disabled {
+  cursor: not-allowed;
+  opacity: 0.85;
+}

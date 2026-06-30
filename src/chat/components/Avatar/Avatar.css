@@ -1,0 +1,6 @@
+.avatar {
+  object-fit: cover;
+  display: block;
+  background: #ddd;
+  flex-shrink: 0;
+}

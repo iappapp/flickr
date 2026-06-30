@@ -1,0 +1,134 @@
+.contact-picker__mask {
+  position: fixed;
+  inset: 0;
+  background: rgba(0, 0, 0, 0.4);
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  z-index: 900;
+}
+
+.contact-picker {
+  width: 360px;
+  max-height: 80vh;
+  background: #fff;
+  border-radius: 8px;
+  display: flex;
+  flex-direction: column;
+  overflow: hidden;
+  box-shadow: 0 8px 24px rgba(0, 0, 0, 0.2);
+}
+
+.contact-picker__header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 12px 16px;
+  border-bottom: 1px solid #f0f0f0;
+  font-size: 15px;
+  font-weight: 600;
+}
+
+.contact-picker__close {
+  border: none;
+  background: transparent;
+  font-size: 20px;
+  cursor: pointer;
+  color: #888;
+  line-height: 1;
+}
+
+.contact-picker__search {
+  padding: 8px 12px;
+  border-bottom: 1px solid #f5f5f5;
+}
+
+.contact-picker__search input {
+  width: 100%;
+  height: 30px;
+  border: 1px solid #e0e0e0;
+  border-radius: 4px;
+  padding: 0 8px;
+  font-size: 13px;
+  outline: none;
+  box-sizing: border-box;
+}
+
+.contact-picker__list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  flex: 1;
+  overflow-y: auto;
+}
+
+.contact-picker__item {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  padding: 8px 16px;
+  cursor: pointer;
+}
+
+.contact-picker__item:hover {
+  background: #f5f5f5;
+}
+
+.contact-picker__item.is-checked {
+  background: #eef9f3;
+}
+
+.contact-picker__avatar {
+  width: 36px;
+  height: 36px;
+  border-radius: 6px;
+  object-fit: cover;
+}
+
+.contact-picker__name {
+  flex: 1;
+  font-size: 14px;
+  color: #333;
+}
+
+.contact-picker__check {
+  color: #07c160;
+  font-size: 16px;
+  width: 20px;
+  text-align: center;
+}
+
+.contact-picker__empty {
+  text-align: center;
+  color: #999;
+  padding: 24px 0;
+  font-size: 13px;
+}
+
+.contact-picker__footer {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 10px 16px;
+  border-top: 1px solid #f0f0f0;
+}
+
+.contact-picker__hint {
+  font-size: 12px;
+  color: #888;
+}
+
+.contact-picker__confirm {
+  border: none;
+  background: #07c160;
+  color: #fff;
+  padding: 6px 18px;
+  border-radius: 4px;
+  cursor: pointer;
+  font-size: 13px;
+}
+
+.contact-picker__confirm:disabled {
+  background: #c8c8c8;
+  cursor: not-allowed;
+}

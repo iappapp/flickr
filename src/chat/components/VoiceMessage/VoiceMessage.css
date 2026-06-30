@@ -1,0 +1,44 @@
+.bubble-voice {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  min-width: 70px;
+  cursor: pointer;
+  user-select: none;
+}
+
+.bubble-voice.is-disabled {
+  cursor: default;
+  opacity: 0.6;
+}
+
+.bubble-voice__icon {
+  font-size: 18px;
+  flex-shrink: 0;
+}
+
+.bubble-voice__duration {
+  font-size: 13px;
+  flex-shrink: 0;
+}
+
+.bubble-voice__bar {
+  flex: 1;
+  height: 3px;
+  background: rgba(0, 0, 0, 0.1);
+  border-radius: 2px;
+  overflow: hidden;
+  min-width: 30px;
+}
+
+.is-me .bubble-voice__bar {
+  background: rgba(0, 0, 0, 0.15);
+}
+
+.bubble-voice__bar-fill {
+  display: block;
+  height: 100%;
+  background: #07c160;
+  width: 0;
+  transition: width 0.15s linear;
+}
