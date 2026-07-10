@@ -41,6 +41,16 @@ const zh = {
   langZh: '中文',
   langEn: 'English',
   back: '返回',
+  pressToTalk: '按住说话',
+  recordingLabel: '录音中',
+  releaseToSend: '松开发送',
+  slideUpCancel: '上滑取消',
+  releaseToCancel: '松开取消',
+  voicePreview: '试听',
+  rerecord: '重录',
+  retry: '重试',
+  seconds: '秒',
+  cancelLabel: '取消',
 };
 
 export default zh;

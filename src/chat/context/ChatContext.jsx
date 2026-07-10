@@ -205,32 +205,25 @@ export function ChatProvider({ children }) {
   }, []);
 
   const forwardMessage = useCallback((convId, msgId, targetConvId) => {
-    let forwarded = null;
-    setConversations((prev) => {
-      const src = prev.find((c) => c.id === convId);
-      const msg = src?.messages.find((m) => m.id === msgId);
-      if (msg) {
-        forwarded = {
-          ...msg,
-          id: newId('m'),
-          senderId: currentUser.id,
-          time: Date.now(),
-          status: 'read',
-          forwarded: true,
-        };
-      }
-      return prev;
-    });
-    if (forwarded) {
-      setConversations((prev) =>
-        prev.map((c) =>
-          c.id === targetConvId
-            ? { ...c, messages: [...c.messages, forwarded] }
-            : c
-        )
-      );
-      setActiveId(targetConvId);
-    }
+    const src = conversationsRef.current.find((c) => c.id === convId);
+    const msg = src?.messages.find((m) => m.id === msgId);
+    if (!msg) return;
+    const forwarded = {
+      ...msg,
+      id: newId('m'),
+      senderId: currentUser.id,
+      time: Date.now(),
+      status: 'read',
+      forwarded: true,
+    };
+    setConversations((prev) =>
+      prev.map((c) =>
+        c.id === targetConvId
+          ? { ...c, messages: [...c.messages, forwarded] }
+          : c
+      )
+    );
+    setActiveId(targetConvId);
   }, []);
 
   // ---- Conversation management (Phase 3) ----

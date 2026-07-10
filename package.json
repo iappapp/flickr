@@ -2,6 +2,7 @@
   "name": "flickr",
   "version": "0.1.0",
   "private": true,
+  "homepage": "/api",
   "dependencies": {
     "@ant-design/icons": "^6.2.5",
     "@testing-library/dom": "^10.4.1",

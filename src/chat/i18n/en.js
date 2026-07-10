@@ -41,6 +41,16 @@ const en = {
   langZh: '中文',
   langEn: 'English',
   back: 'Back',
+  pressToTalk: 'Hold to talk',
+  recordingLabel: 'Recording',
+  releaseToSend: 'Release to send',
+  slideUpCancel: 'Slide up to cancel',
+  releaseToCancel: 'Release to cancel',
+  voicePreview: 'Preview',
+  rerecord: 'Re-record',
+  retry: 'Retry',
+  seconds: 's',
+  cancelLabel: 'Cancel',
 };
 
 export default en;

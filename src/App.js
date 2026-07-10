@@ -14,6 +14,7 @@ import HomePage from './pages/HomePage';
 import CartPage from './pages/CartPage';
 import PeriodicTablePage from './pages/PeriodicTablePage'; // 新增导入
 import WeatherPage from './weather/WeatherPage';
+import ChatApp from './chat/ChatApp';
 import { CartProvider } from './context/CartContext';
 
 function App() {
@@ -24,6 +25,7 @@ function App() {
         <Route path="/cart" element={<CartPage />} />
         <Route path="/periodic-table" element={<PeriodicTablePage />} /> {/* 新增路由 */}
         <Route path="/weather" element={<WeatherPage />} />
+        <Route path="/chat" element={<ChatApp />} />
         <Route path="/login" element={<Login />} />
         <Route path="/game" element={<Game />} />
         <Route path="/message" element={<HelloMessage />} />
