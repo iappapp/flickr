@@ -1,0 +1,17 @@
+# ninja log v5
+3370	3420	1784987058471117907	/Users/apple/Desktop/flickr/android/app/build/intermediates/cxx/Debug/i6o1d3d5/obj/arm64-v8a/libappmodules.so	cf4aa68973589e92
+5	2531	1784987057573612563	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/ShadowNodes.cpp.o	b5e74f031086538c
+8	1750	1784987056797256964	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/safeareacontext-generated.cpp.o	1fa439f01c8d055f
+16	336	1785056203875468025	build.ninja	36a495641bb2b9e0
+3186	3370	1784987058419021480	/Users/apple/Desktop/flickr/android/app/build/intermediates/cxx/Debug/i6o1d3d5/obj/arm64-v8a/libreact_codegen_safeareacontext.so	85f5c122adb80d6e
+3	3093	1784987058131512377	CMakeFiles/appmodules.dir/Users/apple/Desktop/flickr/android/app/build/generated/autolinking/src/main/jni/autolinking.cpp.o	7118cdbe3136a424
+0	8	0	clean	19032e23f5748419
+5	2672	1784987057713372788	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/Props.cpp.o	3dcc2999c1e56aef
+4	3186	1784987058229591919	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/common/cpp/react/renderer/components/safeareacontext/RNCSafeAreaViewShadowNode.cpp.o	a80f0f43be670d67
+4	2554	1784987057594331592	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/common/cpp/react/renderer/components/safeareacontext/RNCSafeAreaViewState.cpp.o	4ca7fd21a867158a
+4	2849	1784987057892593731	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/ComponentDescriptors.cpp.o	3778e736451a0182
+4	1710	1784987056755085237	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/EventEmitters.cpp.o	86ca352fac00e88d
+4	2205	1784987057241001265	CMakeFiles/appmodules.dir/OnLoad.cpp.o	642582f52a51a490
+7	1430	1784987056477990045	safeareacontext_autolinked_build/CMakeFiles/react_codegen_safeareacontext.dir/Users/apple/Desktop/flickr/node_modules/react-native-safe-area-context/android/build/generated/source/codegen/jni/react/renderer/components/safeareacontext/States.cpp.o	a99924401e9bbe2e
+0	10	0	/Users/apple/Desktop/flickr/android/app/.cxx/Debug/i6o1d3d5/arm64-v8a/CMakeFiles/cmake.verify_globs	88c394a0b00e92b5
+0	11	0	/Users/apple/Desktop/flickr/android/app/.cxx/Debug/i6o1d3d5/arm64-v8a/CMakeFiles/cmake.verify_globs	88c394a0b00e92b5

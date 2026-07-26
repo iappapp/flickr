@@ -1,44 +1,44 @@
 {
-  "name": "flickr",
-  "version": "0.1.0",
+  "name": "Flickr",
+  "version": "0.0.1",
   "private": true,
-  "dependencies": {
-    "@ant-design/icons": "^6.2.5",
-    "@testing-library/dom": "^10.4.1",
-    "@testing-library/jest-dom": "^6.9.1",
-    "@testing-library/react": "^16.3.2",
-    "@testing-library/user-event": "^13.5.0",
-    "antd": "^6.4.3",
-    "react": "^19.2.7",
-    "react-dom": "^19.2.7",
-    "react-router-dom": "^6.30.4",
-    "react-scripts": "5.0.1",
-    "tdesign-icons-react": "^0.6.4",
-    "tdesign-react": "^1.17.1",
-    "web-vitals": "^2.1.4"
-  },
   "scripts": {
-    "start": "react-scripts start",
-    "build": "react-scripts build",
-    "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "android": "react-native run-android",
+    "ios": "react-native run-ios",
+    "lint": "eslint .",
+    "start": "react-native start",
+    "test": "jest",
+    "bundle:android": "mkdir -p android/app/src/main/assets && react-native bundle --platform android --dev false --entry-file index.js --bundle-output android/app/src/main/assets/index.android.bundle --assets-dest android/app/src/main/res",
+    "android:offline": "node -e \"const fs=require('fs');const p='android/gradle.properties';fs.writeFileSync(p,fs.readFileSync(p,'utf8').replace(/metroDebug=.*/,'metroDebug=false'))\" && npm run bundle:android && cd android && ./gradlew assembleDebug && cd .. && adb install -r android/app/build/outputs/apk/debug/app-debug.apk && adb shell am start -n com.flickr/.MainActivity",
+    "android:metro": "node -e \"const fs=require('fs');const p='android/gradle.properties';fs.writeFileSync(p,fs.readFileSync(p,'utf8').replace(/metroDebug=.*/,'metroDebug=true'))\" && adb reverse tcp:8081 tcp:8081 && react-native run-android"
   },
-  "eslintConfig": {
-    "extends": [
-      "react-app",
-      "react-app/jest"
-    ]
+  "dependencies": {
+    "react": "19.2.3",
+    "react-native": "0.86.0",
+    "@react-native/new-app-screen": "0.86.0",
+    "react-native-safe-area-context": "^5.5.2"
   },
-  "browserslist": {
-    "production": [
-      ">0.2%",
-      "not dead",
-      "not op_mini all"
-    ],
-    "development": [
-      "last 1 chrome version",
-      "last 1 firefox version",
-      "last 1 safari version"
-    ]
+  "devDependencies": {
+    "@babel/core": "^7.25.2",
+    "@babel/preset-env": "^7.25.3",
+    "@babel/runtime": "^7.25.0",
+    "@react-native-community/cli": "20.1.0",
+    "@react-native-community/cli-platform-android": "20.1.0",
+    "@react-native-community/cli-platform-ios": "20.1.0",
+    "@react-native/babel-preset": "0.86.0",
+    "@react-native/eslint-config": "0.86.0",
+    "@react-native/metro-config": "0.86.0",
+    "@react-native/typescript-config": "0.86.0",
+    "@types/jest": "^29.5.13",
+    "@types/react": "^19.2.0",
+    "@types/react-test-renderer": "^19.1.0",
+    "eslint": "^8.19.0",
+    "jest": "^29.6.3",
+    "prettier": "2.8.8",
+    "react-test-renderer": "19.2.3",
+    "typescript": "^5.8.3"
+  },
+  "engines": {
+    "node": ">= 22.11.0"
   }
 }

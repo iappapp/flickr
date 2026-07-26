@@ -1,0 +1,1 @@
+/Users/apple/Desktop/flickr/android/app/build/intermediates/cxx/RelWithDebInfo/2z37b4v6/obj/arm64-v8a
