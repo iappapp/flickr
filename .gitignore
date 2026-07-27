@@ -31,6 +31,7 @@ android/app/src/main/res/raw/node_modules_*
 # Android
 # ===========================
 android/app/build/
+android/app/.cxx/
 android/.gradle/
 android/build/
 android/captures/
@@ -122,3 +123,4 @@ lerna-debug.log*
 *.orig
 .tmp/
 tmp/
+build/
