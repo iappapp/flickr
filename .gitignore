@@ -81,6 +81,7 @@ DerivedData/
 .env
 .env.*
 !.env.example
+src/weather/secrets.js
 
 # ===========================
 # OS / Editor / IDE

@@ -13,9 +13,10 @@
     "android:metro": "node -e \"const fs=require('fs');const p='android/gradle.properties';fs.writeFileSync(p,fs.readFileSync(p,'utf8').replace(/metroDebug=.*/,'metroDebug=true'))\" && adb reverse tcp:8081 tcp:8081 && react-native run-android"
   },
   "dependencies": {
+    "@react-native-async-storage/async-storage": "^3.1.1",
+    "@react-native/new-app-screen": "0.86.0",
     "react": "19.2.3",
     "react-native": "0.86.0",
-    "@react-native/new-app-screen": "0.86.0",
     "react-native-safe-area-context": "^5.5.2"
   },
   "devDependencies": {
