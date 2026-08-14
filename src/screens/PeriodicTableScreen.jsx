@@ -4,7 +4,9 @@ import {
   Text,
   StyleSheet,
   TouchableOpacity,
+  Pressable,
   Modal,
+  ScrollView,
   useWindowDimensions,
 } from 'react-native';
 
@@ -152,23 +154,28 @@ const MAX_SCALE = 3;
 function createPeriodicTable() {
   const table = Array.from({ length: ROWS }, () => Array(COLS).fill(null));
   elements.forEach((element) => {
+    // 镧系 / 锕系：主表留 La*/Ac*，下方展开完整 15 格
+    if (element.category === '镧系') {
+      if (element.atomicNumber === 57) {
+        table[5][2] = element; // 第6周期第3族
+      }
+      const row = 8;
+      const col = element.atomicNumber - 55; // La→2 … Lu→16
+      if (col >= 0 && col < COLS) table[row][col] = element;
+      return;
+    }
+    if (element.category === '锕系') {
+      if (element.atomicNumber === 89) {
+        table[6][2] = element; // 第7周期第3族
+      }
+      const row = 9;
+      const col = element.atomicNumber - 87; // Ac→2 … Lr→16
+      if (col >= 0 && col < COLS) table[row][col] = element;
+      return;
+    }
+
     let row = element.period - 1;
     let col = element.group - 1;
-    if (element.category === '镧系' && element.atomicNumber >= 58) {
-      row = 8;
-      col = element.atomicNumber - 54;
-    } else if (element.category === '锕系' && element.atomicNumber >= 90) {
-      row = 9;
-      col = element.atomicNumber - 86;
-    }
-    if (element.atomicNumber === 57) {
-      row = 5;
-      col = 2;
-    }
-    if (element.atomicNumber === 89) {
-      row = 6;
-      col = 2;
-    }
     if (element.period === 1) {
       if (element.atomicNumber === 1) col = 0;
       else if (element.atomicNumber === 2) col = 17;
@@ -200,13 +207,14 @@ function clamp(v, min, max) {
 
 /**
  * Pinch-zoom + pan canvas (no extra native deps).
+ * Pan offsets assume scale origin at top-left (transformOrigin).
  */
 function ZoomPanViewport({
   children,
   contentWidth,
   contentHeight,
-  viewportWidth,
-  viewportHeight,
+  viewportWidth: viewportWidthProp,
+  viewportHeight: viewportHeightProp,
   minScale,
   maxScale,
   initialScale,
@@ -215,6 +223,13 @@ function ZoomPanViewport({
   const [scale, setScale] = useState(initialScale);
   const [tx, setTx] = useState(0);
   const [ty, setTy] = useState(0);
+  const [measured, setMeasured] = useState({
+    w: viewportWidthProp,
+    h: viewportHeightProp,
+  });
+
+  const viewportWidth = measured.w || viewportWidthProp;
+  const viewportHeight = measured.h || viewportHeightProp;
 
   const scaleRef = useRef(initialScale);
   const txRef = useRef(0);
@@ -224,6 +239,7 @@ function ZoomPanViewport({
   const pinchStartScale = useRef(1);
   const panStart = useRef({ x: 0, y: 0, tx: 0, ty: 0 });
   const lastTap = useRef(0);
+  const movedRef = useRef(false);
 
   const boundsFor = useCallback(
     (s) => {
@@ -233,6 +249,7 @@ function ZoomPanViewport({
       let maxX;
       let minY;
       let maxY;
+      // Keep at least the full content reachable (no over-clamp past edges)
       if (scaledW <= viewportWidth) {
         const cx = (viewportWidth - scaledW) / 2;
         minX = cx;
@@ -277,10 +294,10 @@ function ZoomPanViewport({
     [boundsFor, applyTransform],
   );
 
-  // Reset when orientation / fit scale changes
+  // Reset when orientation / fit scale / measured viewport changes
   useEffect(() => {
     centerAtScale(initialScale);
-  }, [resetKey, initialScale, centerAtScale]);
+  }, [resetKey, initialScale, viewportWidth, viewportHeight, centerAtScale]);
 
   const zoomBy = (factor) => {
     const next = clamp(scaleRef.current * factor, minScale, maxScale);
@@ -292,8 +309,6 @@ function ZoomPanViewport({
   };
 
   const resetZoom = () => centerAtScale(initialScale);
-
-  const movedRef = useRef(false);
 
   const onTouchStart = (e) => {
     const touches = e.nativeEvent.touches;
@@ -324,13 +339,12 @@ function ZoomPanViewport({
         minScale,
         maxScale,
       );
-      const contentX = (viewportWidth / 2 - txRef.current) / scaleRef.current;
-      const contentY = (viewportHeight / 2 - tyRef.current) / scaleRef.current;
-      applyTransform(
-        next,
-        viewportWidth / 2 - contentX * next,
-        viewportHeight / 2 - contentY * next,
-      );
+      // Zoom around viewport center (stable with top-left origin)
+      const cx = viewportWidth / 2;
+      const cy = viewportHeight / 2;
+      const contentX = (cx - txRef.current) / scaleRef.current;
+      const contentY = (cy - tyRef.current) / scaleRef.current;
+      applyTransform(next, cx - contentX * next, cy - contentY * next);
     } else if (modeRef.current === 'pan' && touches.length === 1) {
       const dx = touches[0].pageX - panStart.current.x;
       const dy = touches[0].pageY - panStart.current.y;
@@ -373,7 +387,19 @@ function ZoomPanViewport({
   };
 
   return (
-    <View style={styles.viewport}>
+    <View
+      style={styles.viewport}
+      onLayout={(e) => {
+        const { width, height } = e.nativeEvent.layout;
+        if (
+          width > 0 &&
+          height > 0 &&
+          (Math.abs(width - measured.w) > 0.5 || Math.abs(height - measured.h) > 0.5)
+        ) {
+          setMeasured({ w: width, h: height });
+        }
+      }}
+    >
       <View
         style={styles.gestureLayer}
         onStartShouldSetResponder={() => false}
@@ -403,14 +429,11 @@ function ZoomPanViewport({
           style={{
             width: contentWidth,
             height: contentHeight,
+            // RN scales from view center; offset so (tx,ty) is the scaled top-left
             transform: [
-              { translateX: tx },
-              { translateY: ty },
-              { translateX: contentWidth / 2 },
-              { translateY: contentHeight / 2 },
+              { translateX: tx + (contentWidth * (scale - 1)) / 2 },
+              { translateY: ty + (contentHeight * (scale - 1)) / 2 },
               { scale },
-              { translateX: -contentWidth / 2 },
-              { translateY: -contentHeight / 2 },
             ],
           }}
           pointerEvents="box-none"
@@ -438,22 +461,25 @@ export default function PeriodicTableScreen() {
   const { width: screenW, height: screenH } = useWindowDimensions();
   const [selectedElement, setSelectedElement] = useState(null);
   const [viewportSize, setViewportSize] = useState({ w: screenW, h: screenH });
+  const [contentSize, setContentSize] = useState({ w: CONTENT_W, h: CONTENT_H });
 
   const isPortrait = screenH >= screenW;
 
   const fit = useMemo(() => {
     const availW = Math.max(1, viewportSize.w || screenW);
     const availH = Math.max(120, viewportSize.h || screenH - 36);
-    const fitW = availW / CONTENT_W;
-    const fitH = availH / CONTENT_H;
+    const cw = Math.max(CONTENT_W, contentSize.w);
+    const ch = Math.max(CONTENT_H, contentSize.h);
+    const fitW = availW / cw;
+    const fitH = availH / ch;
     // Landscape: fit entire table; Portrait: fit width, pan for height
     const fitAll = Math.min(fitW, fitH);
     const initialScale = isPortrait
       ? clamp(fitW, 0.35, 1.25)
       : clamp(fitAll, 0.25, 1.6);
     const minScale = clamp(Math.min(fitAll, fitW) * 0.8, 0.2, initialScale);
-    return { initialScale, minScale, availW, availH };
-  }, [screenW, screenH, viewportSize, isPortrait]);
+    return { initialScale, minScale, availW, availH, cw, ch };
+  }, [screenW, screenH, viewportSize, contentSize, isPortrait]);
 
   const cellW = BASE_CELL;
   const cellH = BASE_CELL * 1.15;
@@ -479,8 +505,8 @@ export default function PeriodicTableScreen() {
         }}
       >
         <ZoomPanViewport
-          contentWidth={CONTENT_W}
-          contentHeight={CONTENT_H}
+          contentWidth={fit.cw}
+          contentHeight={fit.ch}
           viewportWidth={fit.availW}
           viewportHeight={fit.availH}
           minScale={fit.minScale}
@@ -488,7 +514,20 @@ export default function PeriodicTableScreen() {
           initialScale={fit.initialScale}
           resetKey={`${isPortrait ? 'p' : 'l'}-${Math.round(fit.availW)}x${Math.round(fit.availH)}`}
         >
-          <View style={{ padding: CONTENT_PAD, width: CONTENT_W }}>
+          <View
+            style={{ padding: CONTENT_PAD, width: CONTENT_W }}
+            onLayout={(e) => {
+              const { width, height } = e.nativeEvent.layout;
+              if (
+                width > 0 &&
+                height > 0 &&
+                (Math.abs(width - contentSize.w) > 1 ||
+                  Math.abs(height - contentSize.h) > 1)
+              ) {
+                setContentSize({ w: width, h: height });
+              }
+            }}
+          >
             <View style={{ width: TABLE_W }}>
               {periodicTable.map((row, rowIndex) => (
                 <View
@@ -525,6 +564,14 @@ export default function PeriodicTableScreen() {
                             {element.name}
                           </Text>
                         </View>
+                      ) : rowIndex === 8 && colIndex === 0 ? (
+                        <View style={styles.seriesLabel}>
+                          <Text style={styles.seriesLabelText}>镧</Text>
+                        </View>
+                      ) : rowIndex === 9 && colIndex === 0 ? (
+                        <View style={styles.seriesLabel}>
+                          <Text style={styles.seriesLabelText}>锕</Text>
+                        </View>
                       ) : (
                         <View style={styles.emptyCell} />
                       )}
@@ -555,54 +602,82 @@ export default function PeriodicTableScreen() {
         animationType="fade"
         onRequestClose={() => setSelectedElement(null)}
       >
-        <TouchableOpacity
-          style={styles.modalOverlay}
-          activeOpacity={1}
-          onPress={() => setSelectedElement(null)}
-        >
+        <View style={styles.modalOverlay}>
+          <Pressable
+            style={StyleSheet.absoluteFill}
+            onPress={() => setSelectedElement(null)}
+          />
           <View
-            style={[styles.modalContent, { width: Math.min(screenW - 48, 360) }]}
-            onStartShouldSetResponder={() => true}
+            style={[
+              styles.modalContent,
+              {
+                width: isPortrait
+                  ? Math.min(screenW - 48, 360)
+                  : Math.min(screenW - 40, 560),
+                maxHeight: screenH - (isPortrait ? 48 : 16),
+              },
+              !isPortrait && styles.modalContentLandscape,
+            ]}
           >
             {selectedElement && (
-              <>
+              <ScrollView
+                bounces={false}
+                showsVerticalScrollIndicator={false}
+                contentContainerStyle={[
+                  styles.modalScroll,
+                  !isPortrait && styles.modalScrollLandscape,
+                ]}
+              >
                 <View
                   style={[
                     styles.modalSwatch,
                     { backgroundColor: selectedElement.color },
+                    !isPortrait && styles.modalSwatchLandscape,
                   ]}
                 >
                   <Text style={styles.modalSwatchZ}>{selectedElement.atomicNumber}</Text>
-                  <Text style={styles.modalSwatchSymbol}>{selectedElement.symbol}</Text>
+                  <Text
+                    style={[
+                      styles.modalSwatchSymbol,
+                      !isPortrait && { fontSize: 24 },
+                    ]}
+                  >
+                    {selectedElement.symbol}
+                  </Text>
                 </View>
-                <Text style={styles.modalTitle}>
-                  {selectedElement.name} ({selectedElement.symbol})
-                </Text>
-                <View style={styles.detailGrid}>
-                  <DetailRow label="原子序数" value={String(selectedElement.atomicNumber)} />
-                  <DetailRow label="原子量" value={String(selectedElement.weight)} />
-                  <DetailRow
-                    label="周期"
-                    value={String(
-                      selectedElement.period <= 7
-                        ? selectedElement.period
-                        : selectedElement.category,
-                    )}
-                  />
-                  <DetailRow label="族" value={String(selectedElement.group)} />
-                  <DetailRow label="分类" value={selectedElement.category} />
+                <View style={styles.modalBody}>
+                  <Text style={styles.modalTitle} numberOfLines={2}>
+                    {selectedElement.name} ({selectedElement.symbol})
+                  </Text>
+                  <View style={styles.detailGrid}>
+                    <DetailRow
+                      label="原子序数"
+                      value={String(selectedElement.atomicNumber)}
+                    />
+                    <DetailRow label="原子量" value={String(selectedElement.weight)} />
+                    <DetailRow
+                      label="周期"
+                      value={String(
+                        selectedElement.period <= 7
+                          ? selectedElement.period
+                          : selectedElement.category,
+                      )}
+                    />
+                    <DetailRow label="族" value={String(selectedElement.group)} />
+                    <DetailRow label="分类" value={selectedElement.category} />
+                  </View>
+                  <TouchableOpacity
+                    style={[styles.closeBtn, !isPortrait && { marginTop: 10, paddingVertical: 10 }]}
+                    onPress={() => setSelectedElement(null)}
+                    activeOpacity={0.7}
+                  >
+                    <Text style={styles.closeBtnText}>关闭</Text>
+                  </TouchableOpacity>
                 </View>
-                <TouchableOpacity
-                  style={styles.closeBtn}
-                  onPress={() => setSelectedElement(null)}
-                  activeOpacity={0.7}
-                >
-                  <Text style={styles.closeBtnText}>关闭</Text>
-                </TouchableOpacity>
-              </>
+              </ScrollView>
             )}
           </View>
-        </TouchableOpacity>
+        </View>
       </Modal>
     </View>
   );
@@ -675,6 +750,16 @@ const styles = StyleSheet.create({
   emptyCell: {
     flex: 1,
   },
+  seriesLabel: {
+    flex: 1,
+    justifyContent: 'center',
+    alignItems: 'center',
+  },
+  seriesLabelText: {
+    color: 'rgba(255,255,255,0.55)',
+    fontSize: 12,
+    fontWeight: '600',
+  },
   selected: {
     borderWidth: 2,
     borderColor: '#FFD700',
@@ -730,12 +815,27 @@ const styles = StyleSheet.create({
     backgroundColor: 'rgba(0,0,0,0.55)',
     justifyContent: 'center',
     alignItems: 'center',
+    paddingHorizontal: 16,
+    paddingVertical: 8,
   },
   modalContent: {
     backgroundColor: '#fff',
     borderRadius: 16,
+    overflow: 'hidden',
+  },
+  modalContentLandscape: {
+    borderRadius: 12,
+  },
+  modalScroll: {
     padding: 22,
     alignItems: 'center',
+  },
+  modalScrollLandscape: {
+    flexDirection: 'row',
+    alignItems: 'center',
+    paddingVertical: 14,
+    paddingHorizontal: 18,
+    gap: 16,
   },
   modalSwatch: {
     width: 72,
@@ -744,6 +844,17 @@ const styles = StyleSheet.create({
     justifyContent: 'center',
     alignItems: 'center',
     marginBottom: 12,
+  },
+  modalSwatchLandscape: {
+    width: 64,
+    height: 64,
+    marginBottom: 0,
+    flexShrink: 0,
+  },
+  modalBody: {
+    width: '100%',
+    alignItems: 'center',
+    flexShrink: 1,
   },
   modalSwatchZ: {
     fontSize: 12,
@@ -760,6 +871,7 @@ const styles = StyleSheet.create({
     fontWeight: '700',
     color: '#333',
     marginBottom: 16,
+    textAlign: 'center',
   },
   detailGrid: {
     width: '100%',
